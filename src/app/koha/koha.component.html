@@ -1,0 +1,17 @@
+
+
+
+<mat-card class="lajme_card" *ngFor='let item of this.fs.lajmet | async'>
+  <!-- <mat-card-header>
+    <mat-card-title>{{item.lajmi_texti}}</mat-card-title>
+  </mat-card-header> -->
+  <img mat-card-image src="{{item.linku_i_img}}">
+  <mat-card-content>
+    <p>{{item.lajmi_texti}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Up</button>
+    <button mat-button>Down</button>
+  </mat-card-actions>
+</mat-card>
+
