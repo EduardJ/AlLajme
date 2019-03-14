@@ -14,7 +14,5 @@ export class DialogComponent implements OnInit {
   }
 
   ngOnInit() {
-  	//console log data on initiation
-  	console.log(this.data.fullNews);
   }
 }

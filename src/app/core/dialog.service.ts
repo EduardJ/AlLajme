@@ -10,8 +10,6 @@ export class DialogService {
   constructor(public dialog: MatDialog) { }
 
   openDialog(id, img_url, subject, lajme_link, article, organizata): void {
-
-    
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '50em',
       height: '30em',

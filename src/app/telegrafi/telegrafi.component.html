@@ -1,4 +1,4 @@
-<mat-card class="lajme_card" *ngFor='let item of this.fs.Telegrafi | async'>
+<mat-card class="lajme_card" *ngFor='let item of this.fs.telegrafiLajmet | async'>
   <a (click)="this.ds.openDialog(item.id, item.linku_i_img, item.lajmi_texti, item.linku_i_lajmit, item.article, item.organizata)">
     <img mat-card-image src="{{item.linku_i_img}}">
   </a>

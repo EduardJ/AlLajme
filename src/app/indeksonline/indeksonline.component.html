@@ -1,13 +1,13 @@
 <mat-card class="lajme_card" *ngFor='let item of this.fs.indeksonlineLajmet | async'>
-  <a href="{{item.linku_i_lajmit}}">
-	  <img mat-card-image src="{{item.linku_i_img}}">
+  <a (click)="this.ds.openDialog(item.id, item.linku_i_img, item.lajmi_texti, item.linku_i_lajmit, item.article, item.organizata)">
+    <img mat-card-image src="{{item.linku_i_img}}">
   </a>
   <mat-card-content>
     <p>{{item.lajmi_texti}}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button disabled>{{item.votes}}</button>
-    <button mat-button (click)='this.fs.addVote(item.id, "indeksOnline")'>Up</button>
-    <button mat-button (click)='this.fs.removeVote(item.id, "indeksOnline")'>Down</button>
+    <button mat-button (click)='this.fs.addVote(item.id, "lajmet")'>Up</button>
+    <button mat-button (click)='this.fs.removeVote(item.id, "lajmet")'>Down</button>
   </mat-card-actions>
 </mat-card>

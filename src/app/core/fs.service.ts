@@ -91,7 +91,7 @@ export class FsService {
   			const data = a.payload.doc.data() as Lajmi;
   			const id = a.payload.doc.id;
   			return {id, ...data};
-  		}).filter(x => x.organizata == 'Insajder').sort((a,b) => b.lajmeCounter-a.lajmeCounter)));
+  		}).filter(x => x.organizata == 'Insajderi').sort((a,b) => b.lajmeCounter-a.lajmeCounter)));
 
 		// Gazeta Express
   	this.gazetaexpressLajmeCollection = afs.collection<Lajmi>('lajmet');
