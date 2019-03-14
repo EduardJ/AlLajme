@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FsService } from '../core/fs.service';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-telegrafi',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelegrafiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fs: FsService) { }
 
   ngOnInit() {
   }

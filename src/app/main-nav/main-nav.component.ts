@@ -10,6 +10,17 @@ import { map } from 'rxjs/operators';
 })
 export class MainNavComponent {
 
+	lajmetMap= {
+		frontpage: 'FrontPage',
+		telegrafi: 'Telegrafi',
+		koha: 'Koha',
+		insajder: 'Insajder',
+		indeksonline: 'Indeks Online',
+		gazetaexpress: 'Gazeta Express'
+	}
+	
+	objectKeys = Object.keys(this.lajmetMap);
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

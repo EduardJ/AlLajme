@@ -11,9 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class KohaComponent implements OnInit {
 
-  constructor(private fs: FsService) {
-  	
-  }
+  constructor(private fs: FsService) {}
 
   ngOnInit() {
   }

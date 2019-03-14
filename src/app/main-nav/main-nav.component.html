@@ -5,9 +5,7 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="frontpage">FrontPage</a>
-      <a mat-list-item routerLink="telegrafi">Telegrafi</a>
-      <a mat-list-item routerLink="koha">Koha</a>
+      <a mat-list-item *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,9 +20,7 @@
       </button>
       <span>ALLajme</span>
       <span class="spacer"></span>
-      <a routerLink="frontpage">FrontPage</a>
-      <a routerLink="telegrafi">Telegrafi</a>
-      <a routerLink="koha">Koha</a>
+        <a *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
