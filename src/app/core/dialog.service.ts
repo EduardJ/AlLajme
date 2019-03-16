@@ -11,9 +11,10 @@ export class DialogService {
 
   openDialog(id, img_url, subject, lajme_link, article, organizata): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '50em',
+      width: '60em',
       height: '30em',
-      maxHeight: '100em',
+      autoFocus: false,
+      position:{top: '1em'},
       data: {
         'id' : id,
         'img_url': img_url,
@@ -22,6 +23,7 @@ export class DialogService {
         'article': article,
         'organizata': organizata
       }
+
     })
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,11 +1,13 @@
 <h1 mat-dialog-title class="bigTitle">{{this.data.organizata }}</h1>
+<!-- <h2 class="voteCount">Votes:</h2> -->
 <div class="mat-typography">
 	<img src='{{this.data.img_url}}'>
 	
-	<h2 mat-dialog-title>{{this.data.subject}}</h2>
-	<div [innerHTML]='this.data.article'></div>
+	<h1 mat-dialog-title>{{this.data.subject}}</h1>
+	<div [innerHTML]='this.data.article' class="innerHTMLFontSize"></div>
 </div>
 <mat-dialog-actions align="end">
 <button mat-button mat-dialog-close>Cancel</button>
+<a href="www.google.com">link1</a>
 </mat-dialog-actions>
 	
