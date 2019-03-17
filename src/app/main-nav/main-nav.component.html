@@ -20,7 +20,8 @@
       </button>
       <span>ALLajme</span>
       <span class="spacer"></span>
-        <a *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a>
+        <!-- <a *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a> -->
+        <button (click)='this.ls.openDialog()'>Login</button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

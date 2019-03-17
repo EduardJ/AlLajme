@@ -19,6 +19,7 @@ import { IndeksonlineComponent } from './indeksonline/indeksonline.component';
 import { GazetaexpressComponent } from './gazetaexpress/gazetaexpress.component';
 import { InsajderComponent } from './insajder/insajder.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { LoginComponent } from './login/login.component';
 
 
 //Firebase realated imports
@@ -38,7 +39,8 @@ import { environment } from '../environments/environment';
     IndeksonlineComponent,
     GazetaexpressComponent,
     InsajderComponent,
-    DialogComponent
+    DialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -54,11 +56,11 @@ import { environment } from '../environments/environment';
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
-
   ],
 
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
