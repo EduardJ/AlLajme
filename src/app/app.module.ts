@@ -25,7 +25,6 @@ import { DialogComponent } from './dialog/dialog.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { environment } from '../environments/environment';
-import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 
 
@@ -39,8 +38,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
     IndeksonlineComponent,
     GazetaexpressComponent,
     InsajderComponent,
-    DialogComponent,
-    LoadingSpinnerComponent
+    DialogComponent
   ],
   imports: [
     BrowserModule,
