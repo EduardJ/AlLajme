@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../core/auth.service';
 import { Router, Params } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -52,18 +51,8 @@ export class LoginComponent implements OnInit {
 	}
 
 	constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-		private authService: AuthService,
-		private router: Router
+		public authService: AuthService
 		) {	}
-
-	// tryGoogleLogin(){
-	// 	this.authService.doGoogleLogin()
-	// 	.then(res => {
-	// 		this.router.navigate(['/frontpage']);
-	// 	})
-	// }
-
-
 
 	ngOnInit() {
 	}

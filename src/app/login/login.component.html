@@ -1,4 +1,4 @@
-
+<p>{{authService.getIsLoggedIn()}}</p>
 <mat-tab-group>
   <mat-tab label="Kyqu">
   	<div class='Kyqu'>
@@ -18,7 +18,7 @@
 		<button mat-flat-button color='pink' id="forgottenPas">Keni harruar Passwordin?</button>
 		<mat-divider id='after_divider'></mat-divider>
 		<button mat-flat-button >
-			<img src="assets/Google__G__Logo.svg" class="provider_icon">
+			<img src="assets/Google__G__Logo.svg" class="provider_icon" (click)='authService.GoogleAuth()'>
 			Google
 		</button>
   	</div>

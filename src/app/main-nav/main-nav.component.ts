@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoginService } from '../core/login.service';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -27,6 +28,16 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService, private authService: AuthService) {
+
+  }
+
+  getUserName() {
+  	if (this.authService.getIsLoggedIn) {
+  		return this.authService.userData.displayName;
+  	} else {
+  		return 'Log In';
+  	}
+  }
 
 }

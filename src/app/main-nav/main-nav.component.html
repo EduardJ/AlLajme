@@ -24,7 +24,7 @@
         <!-- <a *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a> -->
         <button mat-button (click)='this.ls.openDialog()'>
           <mat-icon>account_circle</mat-icon>
-          Login
+          {{getUserName()}}
         </button>
     </mat-toolbar>
     <!-- Add Content Here -->
