@@ -1,3 +1,46 @@
-<p>
-  login works!
-</p>
+
+<mat-tab-group>
+  <mat-tab label="Kyqu">
+  	<div class='Kyqu'>
+		<p>Login Works</p>
+		<mat-form-field>
+			<input matInput placeholder='Shkruani Email-en tuaj' [formControl]='email'>
+			<mat-error *ngIf='email.invalid'>{{getErrorMessage()}}</mat-error>
+			<mat-icon matSuffix color='primary'> {{'email'}}</mat-icon>
+		</mat-form-field>
+		<br>
+		<mat-form-field>
+			<input matInput placeholder="Shkruani Paswordin tuaj" [type]="hide ? 'password' : 'text'">
+			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+		</mat-form-field>
+		<button mat-raised-button color="primary">Kyqu</button>
+		<mat-divider id='after_divider'></mat-divider>
+		<button mat-flat-button color='pink' id="forgottenPas">Keni harruar Passwordin?</button>
+		<mat-divider id='after_divider'></mat-divider>
+		<button mat-flat-button >
+			<img src="assets/Google__G__Logo.svg" class="provider_icon">
+			Google
+		</button>
+  	</div>
+  </mat-tab>
+
+
+  <mat-tab label="Registrohu">
+  	<div class="Kyqu">
+  		<mat-form-field>
+		    <input matInput placeholder="Emri" [formControl]='name'>
+		    <mat-error *ngIf='name.invalid'>{{getNameErrorMessage()}}</mat-error>
+  		</mat-form-field>
+  		<mat-form-field>
+			<input matInput placeholder="Email" [formControl]='emailRegister'>
+			<mat-error *ngIf='password.invalid'>{{getEmailRegistrationError()}}</mat-error>
+		</mat-form-field>
+  		<mat-form-field>
+			<input matInput placeholder="Shkruani Passwordin qe Deshironi" [type]="hide ? 'password' : 'text'" [formControl]='password'>
+			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+			<mat-error *ngIf='password.invalid'>{{getPasswordErrorMessage()}}</mat-error>
+		</mat-form-field>
+		<button mat-raised-button color="primary">Regjistrohu</button>
+  	</div>
+  </mat-tab>
+</mat-tab-group>
