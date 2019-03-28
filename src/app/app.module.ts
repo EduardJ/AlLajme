@@ -27,7 +27,7 @@ import { GazetaexpressComponent } from './gazetaexpress/gazetaexpress.component'
 import { InsajderComponent } from './insajder/insajder.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { LoginComponent } from './login/login.component';
-// import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/user.component';
 
 
 //Firebase realated imports
@@ -52,8 +52,8 @@ import { AuthService } from './core/auth.service';
     GazetaexpressComponent,
     InsajderComponent,
     DialogComponent,
-    LoginComponent
-    // UserComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -19,8 +19,13 @@ export class LoginService {
   		// minHeight: '22em'
   	});
 
+
   	dialogRef.afterClosed().subscribe(result => {
   		console.log('The Login Dialog has been closed');
   	})
+  }
+
+  closeDialog(){
+    this.dialog.closeAll();
   }
 }

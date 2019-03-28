@@ -4,6 +4,7 @@ import { User } from '../core/user';
 import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
+import { LoginService } from '../core/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
     public ngZone: NgZone //ngZone service to emove outside scope warning
+    // public ls: LoginService
     ) {
   		this.afAuth.authState.subscribe(user => {
   			if (user) {
@@ -79,13 +81,14 @@ export class AuthService {
 	AuthLogin(provider) {
 		return this.afAuth.auth.signInWithPopup(provider)
 			.then((result) => {
+
 				this.ngZone.run(() => {
 					this.router.navigate(['frontpage']);
 	    		})
 	    		this.SetUserData(result.user);
-				 }).catch((error) => {
-				 	window.alert(error)
-				 })
+			}).catch((error) => {
+				window.alert(error)
+			})
 	}
 
 	SetUserData(user) {
@@ -100,6 +103,14 @@ export class AuthService {
 	    return userRef.set(userData, {
 	    	merge: true
 	    })
+	}
+
+	SignOut() {
+		return this.afAuth.auth.signOut()
+		.then(() => {
+			localStorage.removeItem('user');
+			this.router.navigate(['frontpage']);
+		})
 	}
 
 } //End of Class

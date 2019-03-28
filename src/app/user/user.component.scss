@@ -1,0 +1,25 @@
+.user-card {
+	width: 60%;
+	height: 60%;
+	margin: 10%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.user-card-logged-out {
+	width: 60%;
+	height: 60%;
+	margin: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.user-card-logged-out button{
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}

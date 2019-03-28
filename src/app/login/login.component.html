@@ -1,4 +1,3 @@
-<p>{{authService.getIsLoggedIn()}}</p>
 <mat-tab-group>
   <mat-tab label="Kyqu">
   	<div class='Kyqu'>
@@ -19,6 +18,9 @@
 		<mat-divider id='after_divider'></mat-divider>
 		<button mat-flat-button >
 			<img src="assets/Google__G__Logo.svg" class="provider_icon" (click)='authService.GoogleAuth()'>
+			Google
+		</button>
+		<button mat-flat-button (click)='ls.closeDialog()'>
 			Google
 		</button>
   	</div>

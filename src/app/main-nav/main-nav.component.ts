@@ -29,15 +29,9 @@ export class MainNavComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService, private authService: AuthService) {
+    const userData = Observable.create(this.authService.userData);
 
-  }
-
-  getUserName() {
-  	if (this.authService.getIsLoggedIn) {
-  		return this.authService.userData.displayName;
-  	} else {
-  		return 'Log In';
-  	}
+    console.log(userData.uid);
   }
 
 }
