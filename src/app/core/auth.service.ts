@@ -4,11 +4,12 @@ import { User } from '../core/user';
 import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
-import { LoginService } from '../core/login.service';
+import { MatDialog } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class AuthService {
 
@@ -20,8 +21,8 @@ export class AuthService {
   	public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
-    public ngZone: NgZone //ngZone service to emove outside scope warning
-    // public ls: LoginService
+    public ngZone: NgZone, //ngZone service to emove outside scope warning
+    private dialogRef: MatDialog
     ) {
   		this.afAuth.authState.subscribe(user => {
   			if (user) {
@@ -36,6 +37,7 @@ export class AuthService {
 		return this.afAuth.auth.signInWithEmailAndPassword(email, password)
 			.then((result) => {
 				this.ngZone.run(() => {
+					this.dialogRef.closeAll();
 					this.router.navigate(['frontpage']);
 				});
 			}).catch((error) => {
@@ -48,6 +50,8 @@ export class AuthService {
 			.then((result) => {
 				this.SendVerificationMail();
 				this.SetUserData(result.user);
+
+				window.alert('Nje Mesazh konfirmimi eshte derguar ju lutemi konfirmoni emailen the kyquni')
 			}).catch((error) => {
 				window.alert(error.message)
 			})
@@ -56,7 +60,7 @@ export class AuthService {
 	SendVerificationMail(){
 		this.afAuth.auth.currentUser.sendEmailVerification()
 		.then(() => {
-			this.router.navigate(['verifiko-email']);
+			this.router.navigate(['frontpage']);
 		})
 	}
 
@@ -86,6 +90,7 @@ export class AuthService {
 					this.router.navigate(['frontpage']);
 	    		})
 	    		this.SetUserData(result.user);
+	    		this.dialogRef.closeAll();
 			}).catch((error) => {
 				window.alert(error)
 			})

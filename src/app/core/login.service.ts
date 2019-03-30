@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
-import { AuthService } from '../core/auth.service';
+// import { AuthService } from '../core/auth.service';
 
 
 @Injectable({
@@ -10,7 +10,7 @@ import { AuthService } from '../core/auth.service';
 
 export class LoginService {
 
-  constructor(public dialog: MatDialog, private authService: AuthService) { }
+  constructor(public dialog: MatDialog) { }
 
   openDialog(){
   	const dialogRef = this.dialog.open(LoginComponent, {

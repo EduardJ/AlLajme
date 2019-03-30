@@ -1,7 +1,6 @@
 <mat-tab-group>
   <mat-tab label="Kyqu">
   	<div class='Kyqu'>
-		<p>Login Works</p>
 		<mat-form-field>
 			<input matInput placeholder='Shkruani Email-en tuaj' [formControl]='email'>
 			<mat-error *ngIf='email.invalid'>{{getErrorMessage()}}</mat-error>
@@ -9,18 +8,16 @@
 		</mat-form-field>
 		<br>
 		<mat-form-field>
-			<input matInput placeholder="Shkruani Paswordin tuaj" [type]="hide ? 'password' : 'text'">
+			<input matInput placeholder="Shkruani Paswordin tuaj" [type]="hide ? 'password' : 'text'" [formControl]='password2'>
 			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 		</mat-form-field>
-		<button mat-raised-button color="primary">Kyqu</button>
+		<button mat-raised-button color="primary" (click)='authService.SignIn("eduard.j.89@gmail.com","eduard18")'>Kyqu</button>
+
 		<mat-divider id='after_divider'></mat-divider>
 		<button mat-flat-button color='pink' id="forgottenPas">Keni harruar Passwordin?</button>
 		<mat-divider id='after_divider'></mat-divider>
 		<button mat-flat-button >
 			<img src="assets/Google__G__Logo.svg" class="provider_icon" (click)='authService.GoogleAuth()'>
-			Google
-		</button>
-		<button mat-flat-button (click)='ls.closeDialog()'>
 			Google
 		</button>
   	</div>
@@ -42,7 +39,7 @@
 			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 			<mat-error *ngIf='password.invalid'>{{getPasswordErrorMessage()}}</mat-error>
 		</mat-form-field>
-		<button mat-raised-button color="primary">Regjistrohu</button>
+		<button mat-raised-button color="primary" (click)='authService.SignUp(emailRegister.value, password.value)'>Regjistrohu</button>
   	</div>
   </mat-tab>
 </mat-tab-group>
