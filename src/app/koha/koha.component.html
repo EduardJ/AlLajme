@@ -6,8 +6,16 @@
     <p>{{item.lajmi_texti}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button disabled>{{item.votes}}</button>
-    <button mat-button (click)='this.fs.addVote(item.id, "lajmet")'>Up</button>
-    <button mat-button (click)='this.fs.removeVote(item.id, "lajmet")'>Down</button>
+    <div class="card-actions">
+      <button mat-button disabled>{{item.votes}}</button>
+      <button mat-button>
+        <mat-icon (click)='this.fs.addVote(item.id, "lajmet")' color='primary'> arrow_upward</mat-icon>
+      </button>
+      <button mat-button >
+        <mat-icon (click)='this.fs.removeVote(item.id, "lajmet")' color='primary'> arrow_downward</mat-icon>
+      </button>
+    </div>
   </mat-card-actions>
+
+
 </mat-card>

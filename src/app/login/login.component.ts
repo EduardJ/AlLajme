@@ -26,27 +26,27 @@ export class LoginComponent implements OnInit {
 
 	
 	getErrorMessage() {
-	    return this.email.hasError('required') ? 'Kjo fushe nuk guxon te jete e zbrazet' :
-	        this.email.hasError('email') ? 'Not a valid email' :
+	    return this.email.hasError('required') ? 'Kjo fushë nuk duhet të mbetet e zbrazët' :
+	        this.email.hasError('email') ? 'Kjo email nuk është valide' :
 	            '';
 	  }
 
 	getNameErrorMessage() {
-		return this.name.hasError('required') ? 'Emri nuk guxon te jete i zbrazet':
-			this.name.hasError('minlength') ? 'Emri duhet te jete me i gjate se 2 shkronja':
-			this.name.hasError('maxlength') ? 'Emri nuk guxon ti kete me shume se 25 shkronja':
+		return this.name.hasError('required') ? 'Emri nuk duhet të mbetet i zbrazët':
+			this.name.hasError('minlength') ? 'Emri duhet të jetë më i gjatë se 2 shkronja':
+			this.name.hasError('maxlength') ? 'Emri nuk duhet të ketë më shumë se 25 shkronja':
 			'';
 	}
 
 	getEmailRegistrationError(){
-		return this.emailRegister.hasError('required') ? 'Email nuk guxon mu kan i zbrazet':
-			this.emailRegister.hasError('email') ? 'Kjo nuke eshte nje e-mail valide':
+		return this.emailRegister.hasError('required') ? 'Email nuk duhet të mbetet i zbrazët':
+			this.emailRegister.hasError('email') ? 'Kjo nuk është një email valide':
 			'';
 	}
 
 	getPasswordErrorMessage() {
-		return this.password.hasError('required') ? 'Fjalkalimi nuk guxon te jete i zbrazet':
-			this.password.hasError('minlength') ? 'Fjalkalimi duhet te jete me i gjate se 6 simbole':
+		return this.password.hasError('required') ? 'Fjalëkalimi nuk duhet të mbetet i zbrazët':
+			this.password.hasError('minlength') ? 'Fjalëkalimi duhet të jetë më i gjatë se 6 shkronja':
 			// this.password.hasError('patter') ? 'Fjalekalimi duhet te permbaj shkronja te medha dhe dhe Numra':
 			'';
 	}

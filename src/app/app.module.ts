@@ -80,7 +80,7 @@ import { AuthService } from './core/auth.service';
     DialogComponent,
     LoginComponent
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,11 +20,16 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  //after clickin the close butten thw whole page will link to the link of the news
   closingAndGoToLink(link){
+  	this.dialogRef.closeAll();
+  	console.log(link);
   	window.location.href = link;
   	// this.ngZone.run(() => {
   	// 	this.dialogRef.closeAll()
   	// 	this.routes.navigate([link]);
   	// })
   }
+  
 }

@@ -51,7 +51,7 @@ export class AuthService {
 				this.SendVerificationMail();
 				this.SetUserData(result.user);
 
-				window.alert('Nje Mesazh konfirmimi eshte derguar ju lutemi konfirmoni emailen the kyquni')
+				window.alert('Një mesazh konfirmimi është dërguar, ju lutemi konfirmoni email-en dhe kyquni')
 			}).catch((error) => {
 				window.alert(error.message)
 			})
@@ -67,7 +67,7 @@ export class AuthService {
 	ForgotPassword(passwordResetEmail) {
 		return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
 		.then(() => {
-			window.alert('Nje email per fjalkalimin e ri ju eshte derguar ne e-mail');
+			window.alert('Një email për fjalëkalimin e ri ju është dërguar në email');
 		}).catch((error) => {
 			window.alert(error)
 		})

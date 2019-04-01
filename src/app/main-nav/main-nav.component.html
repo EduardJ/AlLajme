@@ -22,14 +22,15 @@
       <span>ALLajme</span>
       <span class="spacer"></span>
         <!-- <a *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a> -->
-        <button mat-button *ngIf='!authService.userData; else elseBlock'  (click)='this.ls.openDialog()'>
-          <mat-icon>account_circle</mat-icon>
-          Log in
+        <button mat-button *ngIf='this.authService.getIsLoggedIn(); else elseBlock'  routerLink='/user'>
+            <mat-icon>account_circle</mat-icon>
+            Perdoruesi
         </button>
-        <ng-template>
-          
-          {{userData.displayName}}
-        
+        <ng-template #elseBlock>
+          <button mat-button (click)='this.ls.openDialog()'>
+            <mat-icon>account_circle</mat-icon>
+            Kyqu
+          </button>
         </ng-template>
     </mat-toolbar>
     <!-- Add Content Here -->

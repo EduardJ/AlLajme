@@ -2,19 +2,19 @@
   <mat-tab label="Kyqu">
   	<div class='Kyqu'>
 		<mat-form-field>
-			<input matInput placeholder='Shkruani Email-en tuaj' [formControl]='email'>
+			<input matInput placeholder='Shkruani email-en tuaj' [formControl]='email'>
 			<mat-error *ngIf='email.invalid'>{{getErrorMessage()}}</mat-error>
 			<mat-icon matSuffix color='primary'> {{'email'}}</mat-icon>
 		</mat-form-field>
 		<br>
 		<mat-form-field>
-			<input matInput placeholder="Shkruani Paswordin tuaj" [type]="hide ? 'password' : 'text'" [formControl]='password2'>
+			<input matInput placeholder="Shkruani fjalëkalimin tuaj" [type]="hide ? 'password' : 'text'" [formControl]='password2'>
 			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 		</mat-form-field>
 		<button mat-raised-button color="primary" (click)='authService.SignIn("eduard.j.89@gmail.com","eduard18")'>Kyqu</button>
 
 		<mat-divider id='after_divider'></mat-divider>
-		<button mat-flat-button color='pink' id="forgottenPas">Keni harruar Passwordin?</button>
+		<button mat-flat-button color='pink' id="forgottenPas" (click)='this.authService.ForgotPassword(this.email.value)'>Keni harruar Passwordin?</button>
 		<mat-divider id='after_divider'></mat-divider>
 		<button mat-flat-button >
 			<img src="assets/Google__G__Logo.svg" class="provider_icon" (click)='authService.GoogleAuth()'>
@@ -24,7 +24,7 @@
   </mat-tab>
 
 
-  <mat-tab label="Registrohu">
+  <mat-tab label="Regjistrohu">
   	<div class="Kyqu">
   		<mat-form-field>
 		    <input matInput placeholder="Emri" [formControl]='name'>
@@ -35,7 +35,7 @@
 			<mat-error *ngIf='password.invalid'>{{getEmailRegistrationError()}}</mat-error>
 		</mat-form-field>
   		<mat-form-field>
-			<input matInput placeholder="Shkruani Passwordin qe Deshironi" [type]="hide ? 'password' : 'text'" [formControl]='password'>
+			<input matInput placeholder="Shkruani fjalëkalimin që dëshironi" [type]="hide ? 'password' : 'text'" [formControl]='password'>
 			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 			<mat-error *ngIf='password.invalid'>{{getPasswordErrorMessage()}}</mat-error>
 		</mat-form-field>

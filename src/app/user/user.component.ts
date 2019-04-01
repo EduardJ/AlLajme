@@ -15,4 +15,13 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
+  //test function to see if we are gettin the right data returned
+  // testGetLoggedIn(){
+  // 	if (this.authService.getIsLoggedIn()) {
+		// console.log('you are logged in');
+  // 	} else {
+  // 		console.log('you are not logged in');
+  // 	}
+  // }
+
 }
