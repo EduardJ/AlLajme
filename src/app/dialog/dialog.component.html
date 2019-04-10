@@ -7,7 +7,7 @@
 	<div [innerHTML]='this.data.article' class="innerHTMLFontSize"></div>
 </div>
 <mat-dialog-actions align="end">
-<button mat-button mat-dialog-close>Cancel</button>
-<a href="www.google.com">link1</a>
+<button mat-button (click)='closingAndGoToLink(this.data.lajme_link)'>Lajmi Origjinal</button>
+<button mat-button mat-dialog-close>Mbylle</button>
 </mat-dialog-actions>
 	

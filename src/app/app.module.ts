@@ -4,12 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//forms
+import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material';
+
+//material
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+  
 //components
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -19,13 +26,18 @@ import { IndeksonlineComponent } from './indeksonline/indeksonline.component';
 import { GazetaexpressComponent } from './gazetaexpress/gazetaexpress.component';
 import { InsajderComponent } from './insajder/insajder.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
 
 
 //Firebase realated imports
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { environment } from '../environments/environment';
-import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+//Authentication
+import { AuthService } from './core/auth.service';
 
 
 
@@ -40,7 +52,8 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
     GazetaexpressComponent,
     InsajderComponent,
     DialogComponent,
-    LoadingSpinnerComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -55,12 +68,17 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
     MatCardModule,
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
-
+    AngularFirestoreModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    AngularFireAuthModule
   ],
 
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

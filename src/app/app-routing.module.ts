@@ -7,6 +7,7 @@ import { KohaComponent } from './koha/koha.component';
 import { IndeksonlineComponent } from './indeksonline/indeksonline.component';
 import { InsajderComponent } from './insajder/insajder.component';
 import { GazetaexpressComponent } from './gazetaexpress/gazetaexpress.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
 	{ path: 'koha', component: KohaComponent},
 	{ path: 'indeksonline', component: IndeksonlineComponent},
 	{ path: 'insajder', component: InsajderComponent},
-	{ path: 'gazetaexpress', component: GazetaexpressComponent}
+	{ path: 'gazetaexpress', component: GazetaexpressComponent},
+	{ path: 'user', component: UserComponent}
 ];
 
 @NgModule({

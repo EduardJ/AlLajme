@@ -4,7 +4,8 @@ import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
-import firestore from 'firebase/firestore';
+import { AuthService } from '../core/auth.service';
+import { LoginService } from '../core/login.service'
 
 
 
@@ -52,7 +53,10 @@ export class FsService {
   lajmetdialog: Observable<lajmiId[]>;
 
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore,
+    private authService: AuthService,
+    private ls: LoginService
+    ) {
 
 
     //Lajmet
@@ -115,31 +119,53 @@ export class FsService {
 
 
   addVote(id, collectionName): void {
-    const docRef = this.afs.collection(collectionName).doc(id);
+    let res = this.authService.getIsLoggedIn();
+    if (res) {
+      const docRef = this.afs.collection(collectionName).doc(id);
+        firebase.firestore().runTransaction(t => {
+          return t.get(docRef.ref).then(doc => {
+            //read the current "votes" field of the document
+            const newValue = doc.data().votes + 1;
 
-    firebase.firestore().runTransaction(t => {
-      return t.get(docRef.ref).then(doc => {
-        //read the current "votes" field of the document
-        const newValue = doc.data().votes + 1;
+            //increase it by 1 atomicallyl
+            t.update(docRef.ref, {
+              votes: newValue
+            })
+          })
+        }).then(res => console.log('Transaction completed!'), err => console.error(err));
 
-        //increase it by 1 atomicallyl
-        t.update(docRef.ref, {
-          votes: newValue
-        })
-      })
-    }).then(res => console.log('Transaction completed!'), err => console.error(err));
+      console.log('you are logged in: ', res)
+    } else {
+      window.alert('You Need To log in to Vote!');
+      this.ls.openDialog();
+      console.log('you are not logged in: ', res);
+    }
   }
 
   removeVote(id, collectionName): void {
-    const docRef = this.afs.collection(collectionName).doc(id);
+    let res = this.authService.getIsLoggedIn();
 
-    firebase.firestore().runTransaction(t => {
-      return t.get(docRef.ref).then(doc => {
-        const newValue = doc.data().votes - 1;
-        t.update(docRef.ref, {
-          votes: newValue
+    if (res) {
+      const docRef = this.afs.collection(collectionName).doc(id);
+
+      firebase.firestore().runTransaction(t => {
+        return t.get(docRef.ref).then(doc => {
+          const newValue = doc.data().votes - 1;
+          t.update(docRef.ref, {
+            votes: newValue
+          });
         });
-      });
-    }).then(res => console.log('Transaction completed!'), err => console.error(err));
+      }).then(res => console.log('Transaction completed!'), err => console.error(err));
+      console.log('you are logged in: ', res)
+    } else {
+      window.alert('You Need To log in to Vote!');
+      this.ls.openDialog();
+      console.log('you are not logged in: ', res);
+    }
+
+  }
+
+  returnSanitizedHtml() {
+
   }
 }
