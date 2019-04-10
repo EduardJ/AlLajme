@@ -122,17 +122,23 @@ export class FsService {
     let res = this.authService.getIsLoggedIn();
     if (res) {
       const docRef = this.afs.collection(collectionName).doc(id);
-        firebase.firestore().runTransaction(t => {
-          return t.get(docRef.ref).then(doc => {
-            //read the current "votes" field of the document
-            const newValue = doc.data().votes + 1;
+      const increment = firebase.firestore.FieldValue.increment(1);
 
-            //increase it by 1 atomicallyl
-            t.update(docRef.ref, {
-              votes: newValue
-            })
-          })
-        }).then(res => console.log('Transaction completed!'), err => console.error(err));
+      docRef.update({votes : increment});
+
+
+      // Old transactional function used
+      //   firebase.firestore().runTransaction(t => {
+      //     return t.get(docRef.ref).then(doc => {
+      //       //read the current "votes" field of the document
+      //       const newValue = doc.data().votes + 1;
+
+      //       //increase it by 1 atomicallyl
+      //       t.update(docRef.ref, {
+      //         votes: newValue
+      //       })
+      //     })
+      //   }).then(res => console.log('Transaction completed!'), err => console.error(err));
 
       console.log('you are logged in: ', res)
     } else {
@@ -147,15 +153,18 @@ export class FsService {
 
     if (res) {
       const docRef = this.afs.collection(collectionName).doc(id);
+      const increment = firebase.firestore.FieldValue.increment(-1);
 
-      firebase.firestore().runTransaction(t => {
-        return t.get(docRef.ref).then(doc => {
-          const newValue = doc.data().votes - 1;
-          t.update(docRef.ref, {
-            votes: newValue
-          });
-        });
-      }).then(res => console.log('Transaction completed!'), err => console.error(err));
+      docRef.update({votes : increment});
+      // Old transactional function used
+      // firebase.firestore().runTransaction(t => {
+      //   return t.get(docRef.ref).then(doc => {
+      //     const newValue = doc.data().votes - 1;
+      //     t.update(docRef.ref, {
+      //       votes: newValue
+      //     });
+      //   });
+      // }).then(res => console.log('Transaction completed!'), err => console.error(err));
       console.log('you are logged in: ', res)
     } else {
       window.alert('You Need To log in to Vote!');
