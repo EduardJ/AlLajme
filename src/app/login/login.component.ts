@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material';
 import { Inject } from '@angular/core';
-import { AuthProvider } from 'ngx-auth-firebaseui';
 import { LoginService } from '../core/login.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';

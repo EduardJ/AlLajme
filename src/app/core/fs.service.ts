@@ -4,7 +4,6 @@ import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
-import firestore from 'firebase/firestore';
 import { AuthService } from '../core/auth.service';
 import { LoginService } from '../core/login.service'
 
