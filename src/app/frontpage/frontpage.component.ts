@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class FrontpageComponent implements OnInit {
 
-  constructor(private fs: FsService, private ds: DialogService) { 
+  constructor(public fs: FsService, private ds: DialogService) { 
   	
   }
 

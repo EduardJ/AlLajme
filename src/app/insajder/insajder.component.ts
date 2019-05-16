@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class InsajderComponent implements OnInit {
 
-  constructor(private fs: FsService, private ds: DialogService) { }
+  constructor(public fs: FsService, private ds: DialogService) { }
 
   ngOnInit() {
   }

@@ -28,7 +28,7 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService, private authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService, public authService: AuthService) {
     const userData = Observable.create(this.authService.userData);
 
     console.log(userData.uid);

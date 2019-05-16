@@ -10,7 +10,7 @@ import { LoginService } from '../core/login.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private authService: AuthService, private ls: LoginService) { }
+  constructor(public authService: AuthService, private ls: LoginService) { }
 
   ngOnInit() {
   }
