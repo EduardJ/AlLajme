@@ -41,7 +41,16 @@ export class AuthService {
 					this.router.navigate(['frontpage']);
 				});
 			}).catch((error) => {
-				window.alert(error.message)
+				var errorCode = error.code;
+				
+				if (errorCode != 'auth/wrong-password') {
+					window.alert('Fjalëkalimi është gabim!')
+				} else if (errorCode != 'auth/user-not-found') {
+					window.alert('Ky përdorues nuk ekziston!')
+				} else {
+					window.alert(error.message);
+				}
+
 			})
 	}
 

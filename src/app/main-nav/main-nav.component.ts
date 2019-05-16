@@ -13,7 +13,7 @@ import { AuthService } from '../core/auth.service';
 export class MainNavComponent {
 
 	lajmetMap= {
-		frontpage: 'FrontPage',
+		frontpage: 'Ballina',
 		telegrafi: 'Telegrafi',
 		koha: 'Koha',
 		insajder: 'Insajder',

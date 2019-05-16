@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 	getPasswordErrorMessage() {
 		return this.password.hasError('required') ? 'Fjalëkalimi nuk duhet të mbetet i zbrazët':
 			this.password.hasError('minlength') ? 'Fjalëkalimi duhet të jetë më i gjatë se 6 shkronja':
-			// this.password.hasError('patter') ? 'Fjalekalimi duhet te permbaj shkronja te medha dhe dhe Numra':
+			// this.password.hasError('patter') ? 'Fjalëkalimi duhet te permbaj shkronja te medha dhe dhe Numra':
 			'';
 	}
 
