@@ -3,10 +3,11 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
+
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item *ngFor='let keys of objectKeys' routerLink={{keys}}>{{lajmetMap[keys]}}</a>
-      <a mat-list-item routerLink='user'>Përdoruesi</a>
+      <a mat-list-item *ngFor='let keys of objectKeys' routerLink={{keys}} (click)="drawer.toggle()">{{lajmetMap[keys]}}</a>
+      <a mat-list-item routerLink='user' (click)="drawer.toggle()">Përdoruesi</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
