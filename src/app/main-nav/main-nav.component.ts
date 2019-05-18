@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter, withLatestFrom } from 'rxjs/operators';
 import { LoginService } from '../core/login.service';
 import { AuthService } from '../core/auth.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-main-nav',
@@ -11,6 +13,8 @@ import { AuthService } from '../core/auth.service';
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent {
+
+ @ViewChild('drawer') drawer: MatSidenav;
 
 	lajmetMap= {
 		frontpage: 'Ballina',
@@ -28,10 +32,13 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService, public authService: AuthService) {
-    const userData = Observable.create(this.authService.userData);
-
-    console.log(userData.uid);
+  constructor(private breakpointObserver: BreakpointObserver, private ls: LoginService, public authService: AuthService, router: Router) {
+    router.events.pipe(
+      withLatestFrom(this.isHandset$),
+      filter(([a,b]) => b && a instanceof NavigationEnd)
+    ).subscribe(_=> this.drawer.close());
   }
+
+
 
 }
