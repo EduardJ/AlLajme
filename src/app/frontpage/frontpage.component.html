@@ -18,6 +18,18 @@
       <button mat-button >
         <mat-icon (click)='this.fs.removeVote(item.id, "lajmet")' color='primary'> arrow_downward</mat-icon>
       </button>
+      <button mat-button (click)='this.fs.addBookmark(item.id)'>
+        <mat-icon matSuffix color='primary'>
+          bookmark_border
+        </mat-icon>
+      </button>
+
+      <!-- <button mat-button *ngIf="true; else elseblock">
+        <mat-icon matSuffix (click)="bookmark = !bookmark" color='primary'>
+          {{bookmark ? 'bookmark' : 'bookmark_border'}}
+        </mat-icon>
+      </button> -->
+      
     </div>
   </mat-card-actions>
 </mat-card>

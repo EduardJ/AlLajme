@@ -29,7 +29,8 @@ export interface lajmiId extends Lajmi{
 
 
 export class FsService {
-  showSpinner: boolean = true;
+
+
 
   private kohaLajmeCollection: AngularFirestoreCollection<Lajmi>;
   kohaLajmet: Observable<lajmiId[]>;
@@ -126,7 +127,6 @@ export class FsService {
 
       docRef.update({votes : increment});
 
-
       // Old transactional function used
       //   firebase.firestore().runTransaction(t => {
       //     return t.get(docRef.ref).then(doc => {
@@ -142,7 +142,7 @@ export class FsService {
 
       console.log('you are logged in: ', res)
     } else {
-      window.alert('You Need To log in to Vote!');
+      window.alert('Duhet te kyqeni para se te votoni!');
       this.ls.openDialog();
       console.log('you are not logged in: ', res);
     }
@@ -156,6 +156,7 @@ export class FsService {
       const increment = firebase.firestore.FieldValue.increment(-1);
 
       docRef.update({votes : increment});
+
       // Old transactional function used
       // firebase.firestore().runTransaction(t => {
       //   return t.get(docRef.ref).then(doc => {
@@ -167,14 +168,46 @@ export class FsService {
       // }).then(res => console.log('Transaction completed!'), err => console.error(err));
       console.log('you are logged in: ', res)
     } else {
-      window.alert('You Need To log in to Vote!');
+      window.alert('Duhet te kyqeni para se te votoni!');
       this.ls.openDialog();
       console.log('you are not logged in: ', res);
     }
-
   }
 
-  returnSanitizedHtml() {
+  addBookmark(id): void {
+    //check if user is looged in
+    let res = this.authService.getIsLoggedIn();
+    if (res) {
 
+      const userId = this.authService.userData.uid;
+      const docRef = this.afs.collection("users").doc(userId);
+
+
+      docRef.get().toPromise().then(function(doc) {
+        if (doc.exists) {
+          // create local variabl which refer to the bookmark field
+          // in the document
+          var bookmarks = doc.data().bookmarks;
+
+          if (bookmarks.indexOf(id) != -1) {
+            // if the bookmark already exists remove it
+            docRef.update({
+              bookmarks: firebase.firestore.FieldValue.arrayRemove(id)
+            })
+          } else {
+            // if it doesnt update the array with it included
+            docRef.update({
+              bookmarks: firebase.firestore.FieldValue.arrayUnion(id)
+            })
+          }
+        } else {
+          console.log("no such document");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document", error);
+      })
+    } else {
+      window.alert("Duhet te kyqeni para se te ruani ndonje lajm!");
+    }
   }
 }

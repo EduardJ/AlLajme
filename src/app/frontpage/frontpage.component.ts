@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./frontpage.component.scss']
 })
 export class FrontpageComponent implements OnInit {
-
+	bookmark = true;
   constructor(public fs: FsService, private ds: DialogService) { 
   	
   }
