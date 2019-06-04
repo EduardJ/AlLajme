@@ -5,6 +5,11 @@ import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import * as firebase from 'firebase';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +20,13 @@ export class AuthService {
 
 	userData: any;
 
-
+	user$: Observable<any>
 
   constructor(
   	public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
-    public ngZone: NgZone, //ngZone service to emove outside scope warning
+    public ngZone: NgZone, //ngZone service to move outside scope warning
     private dialogRef: MatDialog
     ) {
   		this.afAuth.authState.subscribe(user => {
@@ -31,6 +36,18 @@ export class AuthService {
   				JSON.parse(localStorage.getItem('user'));
   			}
   		})
+
+  		this.user$ = this.afAuth.authState.pipe(
+              map(user => {
+                if (user) {
+					//here you get the logged in user cred like uid
+					//you can use uid to refer in your collection
+                  return firebase.auth().currentUser.uid;
+                } else {
+                  return null;
+                }
+              })
+        )
     }
 
 	SignIn(email, password) {

@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { AuthService } from '../core/auth.service';
 import { LoginService } from '../core/login.service'
+import { AngularFireAuth  } from '@angular/fire/auth';
 
 
 
@@ -16,7 +17,8 @@ export interface Lajmi {
   lajmeCounter: number;
   organizata: string;
   votes: number;
-  article: string
+  article: string,
+  bookmarks: string
 }
 
 export interface lajmiId extends Lajmi{
@@ -30,6 +32,7 @@ export interface lajmiId extends Lajmi{
 
 export class FsService {
 
+  userid;
 
 
   private kohaLajmeCollection: AngularFirestoreCollection<Lajmi>;
@@ -53,13 +56,15 @@ export class FsService {
   private lajmetCollectionDialog: AngularFirestoreCollection<Lajmi>;
   lajmetdialog: Observable<lajmiId[]>;
 
+  // private bookmarRef: AngularFirestoreCollection<Lajmi>;
+  bookmarks$: Observable<lajmiId[]>;
+  bookmarksBehaviorSubject : BehaviorSubject<string|null>;
+
 
   constructor(private afs: AngularFirestore,
-    private authService: AuthService,
+    public authService: AuthService,
     private ls: LoginService
     ) {
-
-
     //Lajmet
 
   	// Koha
@@ -108,6 +113,7 @@ export class FsService {
   	}).filter(x => x.organizata == 'GazetaExpress').sort((a,b) => b.lajmeCounter-a.lajmeCounter)));
 
 
+    // Frontapge Content
     this.lajmetCollection = afs.collection<Lajmi>('lajmet');
     this.lajmet = this.lajmetCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -115,9 +121,8 @@ export class FsService {
         const id = a.payload.doc.id;
         return {id, ...data};
     }).filter(x => x.votes > 1).sort((a,b) => b.votes-a.votes)));
-  }
 
-
+  } //constructor end
 
   addVote(id, collectionName): void {
     let res = this.authService.getIsLoggedIn();
@@ -180,7 +185,7 @@ export class FsService {
     if (res) {
 
       const userId = this.authService.userData.uid;
-      const docRef = this.afs.collection("users").doc(userId);
+      const docRef = this.afs.collection("lajmet").doc(id);
 
 
       docRef.get().toPromise().then(function(doc) {
@@ -189,16 +194,24 @@ export class FsService {
           // in the document
           var bookmarks = doc.data().bookmarks;
 
-          if (bookmarks.indexOf(id) != -1) {
-            // if the bookmark already exists remove it
-            docRef.update({
-              bookmarks: firebase.firestore.FieldValue.arrayRemove(id)
-            })
+          // check if the field bookmarks exists
+          if (bookmarks == undefined) {
+            docRef.update({bookmarks: [userId]});
+            console.log('New bookmark has been created and populated with data in the document:', id);
           } else {
-            // if it doesnt update the array with it included
-            docRef.update({
-              bookmarks: firebase.firestore.FieldValue.arrayUnion(id)
-            })
+            if (bookmarks.indexOf(userId) != -1) {
+              // if the bookmark already exists remove it
+              docRef.update({
+                bookmarks: firebase.firestore.FieldValue.arrayRemove(userId)
+              })
+              console.log('A value has been removed from bookmark array from the document:', id );
+            } else {
+              // if it doesnt update the array with it included
+              docRef.update({
+                bookmarks: firebase.firestore.FieldValue.arrayUnion(userId)
+              })
+              console.log('A new value has been added to the bookmark array from the document:', id);
+            }            
           }
         } else {
           console.log("no such document");
@@ -208,6 +221,10 @@ export class FsService {
       })
     } else {
       window.alert("Duhet te kyqeni para se te ruani ndonje lajm!");
+      this.ls.openDialog();
+      console.log('you are not logged in: ', res);
     }
   }
 }
+
+
