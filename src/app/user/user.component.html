@@ -43,14 +43,16 @@
 
 
 <ng-template #elseBlock>
-	<mat-card  class="user-card-logged-out">
-		<mat-card-content >
-			<h1>Nuk jeni të kyqur</h1>
-		</mat-card-content>
-		<mat-card-actions>
-	    	<button mat-stroked-button color="accent" (click)='ls.openDialog()'>Kliko këtu për tu kyqur</button>
-	  	</mat-card-actions>
-	</mat-card>
+	<div>
+		<mat-card  class="user-card">
+			<mat-card-content >
+				<h1>Nuk jeni të kyqur</h1>
+			</mat-card-content>
+			<mat-card-actions>
+		    	<button mat-stroked-button color="accent" (click)='ls.openDialog()'>Kliko këtu për tu kyqur</button>
+		  	</mat-card-actions>
+		</mat-card>
+	</div>
 
 </ng-template>
 

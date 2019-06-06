@@ -15,7 +15,7 @@
         <mat-icon (click)='this.fs.removeVote(item.id, "lajmet")' color='primary'> arrow_downward</mat-icon>
       </button>
 
-      <button mat-button *ngIf="item.bookmarks; else elseBlock" (click)='this.fs.addBookmark(item.id)'>
+      <button mat-button *ngIf="item.bookmarks&&this.auth.getIsLoggedIn(); else elseBlock" (click)='this.fs.addBookmark(item.id)'>
         <mat-icon *ngIf='item.bookmarks.includes(this.auth.userData.uid); else elseBlock' matSuffix color='accent'>
           bookmarks
         </mat-icon>
