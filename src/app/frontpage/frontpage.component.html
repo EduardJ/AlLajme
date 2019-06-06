@@ -3,7 +3,7 @@
 	  <img mat-card-image src="{{item.linku_i_img}}">
   </a>
   <mat-card-content>
-    <p>{{item.lajmi_texti}}</p>
+    <h3>{{item.lajmi_texti}}</h3>
   </mat-card-content>
 
   <mat-card-actions>
@@ -15,11 +15,25 @@
       <button mat-button >
         <mat-icon (click)='this.fs.removeVote(item.id, "lajmet")' color='primary'> arrow_downward</mat-icon>
       </button>
-      <button mat-button (click)='this.fs.addBookmark(item.id)'>
-        <mat-icon matSuffix color='primary'>
-          bookmark_border
+
+      <button mat-button *ngIf="item.bookmarks; else elseBlock" (click)='this.fs.addBookmark(item.id)'>
+        <mat-icon *ngIf='item.bookmarks.includes(this.auth.userData.uid); else elseBlock' matSuffix color='accent'>
+          bookmarks
         </mat-icon>
-      </button>      
+        <ng-template #elseBlock>
+          <mat-icon matSuffix color='accent'>
+            bookmark_border
+          </mat-icon>
+        </ng-template>
+      </button>
+      <ng-template #elseBlock>
+
+        <button mat-button (click)='this.fs.addBookmark(item.id)'>
+          <mat-icon matSuffix color='accent' >
+            bookmark_border
+          </mat-icon>
+        </button>
+      </ng-template>
     </div>
   </mat-card-actions>
 </mat-card>

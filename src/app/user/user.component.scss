@@ -24,3 +24,29 @@
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
+
+//card regarding the news
+.mat-card {
+	width: 18em;
+	display: inline-block;
+}
+.lajme_card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2em;
+}
+
+ul {
+	padding-left: 0px;
+}
+
+.card-actions {
+    display: block;
+    margin-left: auto;
+	  margin-right: auto;
+    text-align: center;
+}
+
+.user-card {
+	display: block;
+}

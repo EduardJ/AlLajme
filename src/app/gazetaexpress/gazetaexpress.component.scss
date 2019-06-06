@@ -1,23 +1,16 @@
-
 .mat-card {
-	width: 18em;
-	display: inline-block;
+  width: 18em;
+  display: inline-block;
 }
-
 .lajme_card {
   margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 2em;
 }
 
-.mat-button[disabled] {
-	color: black;
-}
-
 .card-actions {
     display: block;
     margin-left: auto;
-	margin-right: auto;
-    width: 80%;
+    margin-right: auto;
     text-align: center;
 }
