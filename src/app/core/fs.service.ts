@@ -18,7 +18,9 @@ export interface Lajmi {
   organizata: string;
   votes: number;
   article: string,
-  bookmarks: string
+  bookmarks: string,
+  upVoteArray: string,
+  downVoteArray: string
 }
 
 export interface lajmiId extends Lajmi{
@@ -124,58 +126,129 @@ export class FsService {
 
   } //constructor end
 
-  addVote(id, collectionName): void {
+  addVote(id): void {
     let res = this.authService.getIsLoggedIn();
+
+
     if (res) {
-      const docRef = this.afs.collection(collectionName).doc(id);
+
+      const userId = this.authService.userData.uid;
+      const docRef = this.afs.collection("lajmet").doc(id);
       const increment = firebase.firestore.FieldValue.increment(1);
+      const decrease = firebase.firestore.FieldValue.increment(-1);
 
-      docRef.update({votes : increment});
+      docRef.get().toPromise().then(function(doc) {
 
-      // Old transactional function used
-      //   firebase.firestore().runTransaction(t => {
-      //     return t.get(docRef.ref).then(doc => {
-      //       //read the current "votes" field of the document
-      //       const newValue = doc.data().votes + 1;
+        if (doc.exists) {
+          // create local variabl which refer to the upVoteArray field
+          // in the document
+          var upVoteArray = doc.data().upVoteArray;
+          var downVoteArray = doc.data().downVoteArray;
 
-      //       //increase it by 1 atomicallyl
-      //       t.update(docRef.ref, {
-      //         votes: newValue
-      //       })
-      //     })
-      //   }).then(res => console.log('Transaction completed!'), err => console.error(err));
+          //Check if uid exist in downVoteArray
+          if (downVoteArray != undefined) {
+            if (downVoteArray.indexOf(userId) != -1) {
+              docRef.update({
+                  downVoteArray: firebase.firestore.FieldValue.arrayRemove(userId)
+                })
+            }
+          }
 
-      console.log('you are logged in: ', res)
+          // check if the field upVoteArray exists
+          if (upVoteArray == undefined) {
+            docRef.update({upVoteArray: [userId]});
+            docRef.update({votes : increment});
+            console.log('New upVoteArray has been created and populated with data in the document:', id);
+          } else {
+            if (upVoteArray.indexOf(userId) != -1) {
+              // if the userId already exists in upVoteArray remove and decrease the counter
+              docRef.update({
+                upVoteArray: firebase.firestore.FieldValue.arrayRemove(userId)
+              })
+              docRef.update({votes : decrease});
+              console.log('A value has been removed from upVoteArray array from the document:', id );
+            } else {
+              // if it doesnt update the array with it included
+              docRef.update({
+                upVoteArray: firebase.firestore.FieldValue.arrayUnion(userId)
+              })
+              docRef.update({votes : increment});
+              console.log('A new value has been added to the upVoteArray array from the document:', id);
+            }            
+          }
+        } else {
+          console.log("no such document");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document", error);
+      })
     } else {
-      window.alert('Duhet te kyqeni para se te votoni!');
+      window.alert("Duhet te kyqeni para se te votoni ndonje lajm!");
       this.ls.openDialog();
-      console.log('you are not logged in: ', res);
+      console.log('nuk jini te kyqyr: ', res);
     }
   }
 
-  removeVote(id, collectionName): void {
+  removeVote(id): void {
     let res = this.authService.getIsLoggedIn();
 
     if (res) {
-      const docRef = this.afs.collection(collectionName).doc(id);
-      const increment = firebase.firestore.FieldValue.increment(-1);
 
-      docRef.update({votes : increment});
+      const userId = this.authService.userData.uid;
+      const docRef = this.afs.collection("lajmet").doc(id);
+      const increment = firebase.firestore.FieldValue.increment(1);
+      const decrease = firebase.firestore.FieldValue.increment(-1);
 
-      // Old transactional function used
-      // firebase.firestore().runTransaction(t => {
-      //   return t.get(docRef.ref).then(doc => {
-      //     const newValue = doc.data().votes - 1;
-      //     t.update(docRef.ref, {
-      //       votes: newValue
-      //     });
-      //   });
-      // }).then(res => console.log('Transaction completed!'), err => console.error(err));
-      console.log('you are logged in: ', res)
+      docRef.get().toPromise().then(function(doc) {
+
+        if (doc.exists) {
+          // create local variabl which refer to the downVoteArray field
+          // in the document
+          var downVoteArray = doc.data().downVoteArray;
+          var upVoteArray = doc.data().upVoteArray;
+
+          //Check if uid exist in upVoteArray
+          if (upVoteArray != undefined) {
+            if (upVoteArray.indexOf(userId) != -1) {
+              docRef.update({
+                  upVoteArray: firebase.firestore.FieldValue.arrayRemove(userId)
+                })
+            }
+          }
+
+
+          // check if the field downVoteArray exists
+          if (downVoteArray == undefined) {
+            docRef.update({downVoteArray: [userId]});
+            docRef.update({votes : decrease});
+            console.log('New downVoteArray has been created and populated with data in the document:', id);
+          } else {
+            if (downVoteArray.indexOf(userId) != -1) {
+              // if the userId already exists in downVoteArray remove and decrease the counter
+              docRef.update({
+                downVoteArray: firebase.firestore.FieldValue.arrayRemove(userId)
+              })
+              docRef.update({votes : increment});
+              console.log('A value has been removed from downVoteArray array from the document:', id );
+            } else {
+              // if it doesnt contain the userID update the array with it included
+              docRef.update({
+                downVoteArray: firebase.firestore.FieldValue.arrayUnion(userId)
+              })
+              docRef.update({votes : decrease});
+              console.log('A new value has been added to the downVoteArray array from the document:', id);
+            }            
+          }
+        } else {
+          console.log("no such document");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document", error);
+      })
     } else {
-      window.alert('Duhet te kyqeni para se te votoni!');
+      window.alert("Duhet te kyqeni para se te votoni ndonje lajm!");
       this.ls.openDialog();
-      console.log('you are not logged in: ', res);
+      console.log('nuk jini te kyqyr: ', res);
     }
   }
 

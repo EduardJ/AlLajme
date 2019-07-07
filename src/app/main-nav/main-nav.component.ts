@@ -5,7 +5,7 @@ import { map, filter, withLatestFrom } from 'rxjs/operators';
 import { LoginService } from '../core/login.service';
 import { AuthService } from '../core/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav,MatSidenavContainer } from '@angular/material';
 
 @Component({
   selector: 'app-main-nav',
@@ -38,6 +38,21 @@ export class MainNavComponent {
       filter(([a,b]) => b && a instanceof NavigationEnd)
     ).subscribe(_=> this.drawer.close());
   }
+
+  onSwipeRight(evt) {
+    if (this.isHandset$ && !this.drawer.opened) {
+      console.log("swiperight event is executed!");
+      this.drawer.open();
+    }
+  }
+
+  onSwipeLeft(evt){
+    if (this.isHandset$ && this.drawer.opened) {
+      console.log("swipeleft event is executed!");
+      this.drawer.close();
+    }
+  }
+
 
 
 

@@ -1,13 +1,16 @@
-<h1 mat-dialog-title class="bigTitle">{{this.data.organizata }}</h1>
-<!-- <h2 class="voteCount">Votes:</h2> -->
-<div class="mat-typography">
-	<img src='{{this.data.img_url}}'>
+<body [@dialogAnimator]="animationState"  >
+	<h1 mat-dialog-title class="bigTitle">{{this.data.organizata }}</h1>
+	<!-- <h2 class="voteCount">Votes:</h2> -->
+	<div mat-dialog-content class="mat-typography" (swiperight)="startAnimation('rotateOutUpRight')">
+		<img src='{{this.data.img_url}}'>
+		
+		<h1 mat-dialog-title>{{this.data.subject}}</h1>
+		<div [innerHTML]='this.data.article' class="innerHTMLFontSize"></div>
+	</div>
+	<mat-dialog-actions align="end">
+		<button mat-button (click)='closingAndGoToLink(this.data.lajme_link)'>Lajmi Origjinal</button>
+		<button mat-button mat-dialog-close>Mbylle</button>
+	</mat-dialog-actions>
 	
-	<h1 mat-dialog-title>{{this.data.subject}}</h1>
-	<div [innerHTML]='this.data.article' class="innerHTMLFontSize"></div>
-</div>
-<mat-dialog-actions align="end">
-<button mat-button (click)='closingAndGoToLink(this.data.lajme_link)'>Lajmi Origjinal</button>
-<button mat-button mat-dialog-close>Mbylle</button>
-</mat-dialog-actions>
+</body>
 	
