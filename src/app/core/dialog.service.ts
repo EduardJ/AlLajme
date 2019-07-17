@@ -14,7 +14,7 @@ export class DialogService {
       width: '60em',
       
       autoFocus: false,
-      position:{top: '20%'},
+      position:{top: '2em'},
       data: {
         'id' : id,
         'img_url': img_url,

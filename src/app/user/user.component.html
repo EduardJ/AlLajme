@@ -1,5 +1,5 @@
-<div *ngIf='authService.userData; else elseBlock'>
-	<mat-card class="user-card">
+<div *ngIf='authService.userData; else elseBlock' class="user-card">
+	<mat-card>
 	  <mat-card-header>
 	    <div mat-card-avatar class="example-header-image"></div>
 	    <mat-card-title>{{authService.userData.displayName}}</mat-card-title>
@@ -43,8 +43,8 @@
 
 
 <ng-template #elseBlock>
-	<div>
-		<mat-card  class="user-card">
+	<div  class="user-card">
+		<mat-card >
 			<mat-card-content >
 				<h1>Nuk jeni të kyqur</h1>
 			</mat-card-content>

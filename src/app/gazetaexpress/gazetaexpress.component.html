@@ -3,6 +3,9 @@
   <a (click)="this.ds.openDialog(item.id, item.linku_i_img, item.lajmi_texti, item.linku_i_lajmit, item.article, item.organizata)">
     <img mat-card-image src="{{item.linku_i_img}}">
   </a>
+  <mat-card-content>
+    <h3>{{item.lajmi_texti}}</h3>
+  </mat-card-content>
 <mat-card-actions>
     <div class="card-actions">
       <button mat-button disabled>{{item.votes}}</button>
