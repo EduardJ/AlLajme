@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "allajme": {
-      "root": "",
+      "root": "dist/allajme",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
