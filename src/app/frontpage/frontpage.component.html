@@ -1,15 +1,26 @@
-<mat-card class="lajme_card" *ngFor='let item of this.fs.lajmet | async'>
-  <a (click)="this.ds.openDialog(item.id, item.linku_i_img, item.lajmi_texti, item.linku_i_lajmit, item.article, item.organizata)">
-	  <img mat-card-image src="{{item.linku_i_img}}">
+<mat-card class="lajme_card" *ngFor="let item of this.fs.lajmet | async">
+  <a
+    (click)="
+      this.ds.openDialog(
+        item.id,
+        item.linku_i_img,
+        item.lajmi_texti,
+        item.linku_i_lajmit,
+        item.article,
+        item.organizata
+      )
+    "
+  >
+    <img mat-card-image src="{{ item.linku_i_img }}" />
   </a>
   <mat-card-content>
-    <h3>{{item.lajmi_texti}}</h3>
+    <h3>{{ item.lajmi_texti }}</h3>
   </mat-card-content>
 
   <mat-card-actions>
     <div class="card-actions">
-      <button mat-button disabled>{{item.votes}}</button>
-<!--       <button mat-button>
+      <button mat-button disabled>{{ item.votes }}</button>
+      <!--       <button mat-button>
         <mat-icon (click)='this.fs.addVote(item.id, "lajmet")' color='primary'> arrow_upward</mat-icon>
       </button>
       <button mat-button >
@@ -17,60 +28,84 @@
       </button> -->
 
       <!-- Upvote Button -->
-      <button mat-button *ngIf="item.upVoteArray&&this.auth.getIsLoggedIn(); else elseBlockUpVote" (click)='this.fs.addVote(item.id)'>
-        <mat-icon *ngIf='item.upVoteArray.includes(this.auth.userData.uid); else elseBlockUpVote' color='accent'>
+      <button
+        mat-button
+        *ngIf="
+          item.upVoteArray && this.auth.getIsLoggedIn();
+          else elseBlockUpVote
+        "
+        (click)="this.fs.addVote(item.id)"
+      >
+        <mat-icon
+          *ngIf="
+            item.upVoteArray.includes(this.auth.userData.uid);
+            else elseBlockUpVote
+          "
+          color="accent"
+        >
           arrow_upward
         </mat-icon>
         <ng-template #elseBlockUpVote>
-          <mat-icon color='primary'>
-            arrow_upward
-          </mat-icon>
+          <mat-icon color="primary"> arrow_upward </mat-icon>
         </ng-template>
       </button>
       <ng-template #elseBlockUpVote>
-        <button mat-button (click)='this.fs.addVote(item.id)'>
-          <mat-icon color='primary' >
-             arrow_upward
-          </mat-icon>
+        <button mat-button (click)="this.fs.addVote(item.id)">
+          <mat-icon color="primary"> arrow_upward </mat-icon>
         </button>
       </ng-template>
 
       <!-- Upvote Button -->
-      <button mat-button *ngIf="item.downVoteArray&&this.auth.getIsLoggedIn(); else elseBlockDownVote" (click)='this.fs.removeVote(item.id)'>
-        <mat-icon *ngIf='item.downVoteArray.includes(this.auth.userData.uid); else elseBlockDownVote' color='accent'>
+      <button
+        mat-button
+        *ngIf="
+          item.downVoteArray && this.auth.getIsLoggedIn();
+          else elseBlockDownVote
+        "
+        (click)="this.fs.removeVote(item.id)"
+      >
+        <mat-icon
+          *ngIf="
+            item.downVoteArray.includes(this.auth.userData.uid);
+            else elseBlockDownVote
+          "
+          color="accent"
+        >
           arrow_downward
         </mat-icon>
         <ng-template #elseBlockDownVote>
-          <mat-icon color='primary'>
-            arrow_downward
-          </mat-icon>
+          <mat-icon color="primary"> arrow_downward </mat-icon>
         </ng-template>
       </button>
       <ng-template #elseBlockDownVote>
-        <button mat-button (click)='this.fs.addVote(item.id)'>
-          <mat-icon color='primary' >
-             arrow_downward
-          </mat-icon>
+        <button mat-button (click)="this.fs.addVote(item.id)">
+          <mat-icon color="primary"> arrow_downward </mat-icon>
         </button>
       </ng-template>
 
       <!-- Bookmark Button -->
-      <button mat-button *ngIf="item.bookmarks&&this.auth.getIsLoggedIn(); else elseBlock" (click)='this.fs.addBookmark(item.id)'>
-        <mat-icon *ngIf='item.bookmarks.includes(this.auth.userData.uid); else elseBlock' matSuffix color='accent'>
+      <button
+        mat-button
+        *ngIf="item.bookmarks && this.auth.getIsLoggedIn(); else elseBlock"
+        (click)="this.fs.addBookmark(item.id)"
+      >
+        <mat-icon
+          *ngIf="
+            item.bookmarks.includes(this.auth.userData.uid);
+            else elseBlock
+          "
+          matSuffix
+          color="accent"
+        >
           bookmarks
         </mat-icon>
         <ng-template #elseBlock>
-          <mat-icon matSuffix color='primary'>
-            bookmark_border
-          </mat-icon>
+          <mat-icon matSuffix color="primary"> bookmark_border </mat-icon>
         </ng-template>
       </button>
       <ng-template #elseBlock>
-
-        <button mat-button (click)='this.fs.addBookmark(item.id)'>
-          <mat-icon matSuffix color='primary' >
-            bookmark_border
-          </mat-icon>
+        <button mat-button (click)="this.fs.addBookmark(item.id)">
+          <mat-icon matSuffix color="primary"> bookmark_border </mat-icon>
         </button>
       </ng-template>
     </div>

@@ -2,13 +2,13 @@
   <mat-tab label="Kyqu">
   	<div class='Kyqu'>
 		<mat-form-field>
-			<input matInput placeholder='Shkruani email-en tuaj' [formControl]='email'>
+			<input matInput placeholder='Shkruani email-en tuaj' FormControlName='email'>
 			<mat-error *ngIf='email.invalid'>{{getErrorMessage()}}</mat-error>
 			<mat-icon matSuffix color='primary'> {{'email'}}</mat-icon>
 		</mat-form-field>
 		<br>
 		<mat-form-field>
-			<input matInput placeholder="Shkruani fjalëkalimin tuaj" [type]="hide ? 'password' : 'text'" [formControl]='password2'>
+			<input matInput placeholder="Shkruani fjalëkalimin tuaj" [type]="hide ? 'password' : 'text'" FormControlName='password2'>
 			<mat-icon matSuffix (click)="hide = !hide" color='primary'> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 		</mat-form-field>
 		<button mat-raised-button color="primary" (click)='authService.SignIn("eduard.j.89@gmail.com","eduard18")'>Kyqu</button>
