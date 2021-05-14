@@ -14,7 +14,7 @@ import { MatSidenav,MatSidenavContainer } from '@angular/material';
 })
 export class MainNavComponent {
 
- @ViewChild('drawer') drawer: MatSidenav;
+ @ViewChild('drawer', { static: true }) drawer: MatSidenav;
 
 	lajmetMap= {
 		frontpage: 'Ballina',
