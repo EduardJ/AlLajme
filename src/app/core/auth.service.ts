@@ -4,7 +4,7 @@ import { User } from '../core/user';
 import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import * as firebase from 'firebase';

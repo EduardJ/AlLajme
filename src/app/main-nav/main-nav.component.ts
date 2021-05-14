@@ -5,7 +5,7 @@ import { map, filter, withLatestFrom } from 'rxjs/operators';
 import { LoginService } from '../core/login.service';
 import { AuthService } from '../core/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { MatSidenav,MatSidenavContainer } from '@angular/material';
+import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-main-nav',
