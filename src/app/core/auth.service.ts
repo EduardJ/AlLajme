@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { User } from '../core/user';
-import { auth } from 'firebase/app';
+// import { auth } from 'firebase/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
