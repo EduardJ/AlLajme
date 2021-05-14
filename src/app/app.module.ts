@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -77,7 +77,8 @@ import { AuthService } from './core/auth.service';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HammerModule
   ],
 
   entryComponents: [
